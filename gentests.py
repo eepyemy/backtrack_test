@@ -1,8 +1,9 @@
 from rich import print
-from pprint import pprint
-import pandas as pd
 import sys
 import random
+
+def print_grid(grid):
+	print('\n'.join([' '.join([str(cell) for cell in row]) for row in grid]))
 
 def get_column(col, board):
 	return [x[col] for x in board]

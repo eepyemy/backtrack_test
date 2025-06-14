@@ -1,7 +1,8 @@
 from rich import print
-from pprint import pprint
-import pandas as pd
 import sys
+
+def print_grid(grid):
+	print('\n'.join([' '.join([str(cell) for cell in row]) for row in grid]))
 
 def get_column(col, board):
 	return [x[col] for x in board]
@@ -41,7 +42,7 @@ def	found_solution(board):
 
 def backtrack(row, col, board, borders):
 	if (found_solution(board)):
-		print(pd.DataFrame(board))
+		print_grid(board)
 		return
 	for choice in range(1, N+1):
 		if (can_place(row, col, board, borders, choice)):
