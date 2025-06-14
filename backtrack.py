@@ -38,11 +38,13 @@ def can_place(row, col, board, borders, value):
 	return all(checks)
 
 def	found_solution(board):
-	return all([all(board[x]) for x in range(N)])
+	global FOUND
+	if not FOUND:
+		FOUND = all([all(board[x]) for x in range(N)])
+	return FOUND
 
 def backtrack(row, col, board, borders):
 	if (found_solution(board)):
-		print_grid(board)
 		return
 	for choice in range(1, N+1):
 		if (can_place(row, col, board, borders, choice)):
@@ -54,8 +56,10 @@ def backtrack(row, col, board, borders):
 		if (next_col == 0):
 			next_row = (row + 1) % N
 		backtrack(next_row, next_col, board, borders)
-	board[row][col] = 0
+	if not FOUND:
+		board[row][col] = 0
 
+FOUND = False
 N = int(sys.argv[1])
 positions = ["top", "bottom", "left", "right"]
 borders = sys.argv[2].split(" ")
@@ -65,3 +69,4 @@ print(board)
 
 print(borders)
 backtrack(0, 0, board, borders)
+print_grid(board)
