@@ -45,6 +45,8 @@ def borders_to_str(borders):
 def gentests(row, col, board):
 	if (found_solution(board)):
 		print(borders_to_str(get_borders(board)))
+		print_grid(board)
+		return
 	choices = list(range(1, N+1))
 	random.shuffle(choices)
 	for choice in choices:
